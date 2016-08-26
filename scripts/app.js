@@ -26,7 +26,8 @@ salaryApp.controller("salaryController", ["$scope", function($scope) {
     $scope.employeesalary = "";
   }
 
-  // $scope.deleteEmployee = function() {
-  //   $scope.employee
-  // }
+  $scope.deleteEmployee = function(index) {
+    $scope.employees.splice(index, 1);
+    $scope.salaries -= Math.round($scope.employee.salary/12);
+  }
 }]);
