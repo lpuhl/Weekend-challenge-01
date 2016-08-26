@@ -1,45 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="salaryApp">
 
 <head>
     <meta charset="UTF-8">
     <title>Salary Calculator</title>
-    <script type="text/javascript" src="vendor/jquery-3.0.0.min.js"></script>
-    <script type="text/javascript" src="forms.js"></script>
+    <script type="text/javascript" src="vendor/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/forms.js"></script>
+    <script type="text/javascript" src="scripts/controllers/SalaryController.js"></script>
+
     <link rel="stylesheet" href="form-style.css" />
 </head>
 
 <body>
     <h1>Salary Calculator</h1>
-    <div>
+    <div ng-controller="salaryController">
         <form id="employeeinfo">
-            <label for="employeefirstname">Employee First Name:</label>
-            <input type="text" id="employeefirstname" name="employeefirstname" />
+            <label for="first_name">Employee First Name:</label>
+            <input ng-model="first_name" type="text" id="first_name" name="first_name" />
 
-            <label for="employeelastname">Employee Last Name:</label>
-            <input type="text" id="employeelastname" name="employeelastname" />
+            <label for="last_name">Employee Last Name:</label>
+            <input ng-model="last_name" type="text" id="last_name" name="last_name" />
 
             <label for="employeeid">Employee ID:</label>
-            <input type="text" id="employeeid" name="employeeid" />
+            <input ng-model="employeeid" type="text" id="employeeid" name="employeeid" />
 
             <label for="employeesalary">Employee’s Salary (Yearly):</label>
-            <input type="text" id="employeesalary" name="employeesalary" />
+            <input ng-model="employeesalary" type="text" id="employeesalary" name="employeesalary" />
 
-            <input type="submit" value="Submit Employee" />
+            <input ng-click="addEmployee()" type="submit" value="Submit Employee" />
         </form>
-    </div>
-    <div id="container">
+        <!-- <div id="container"> -->
         <h2>Employees</h2>
-        <table id="employeetable">
+        <table id="employeetable" >
+          <tr>
             <th>First Name</th>
             <th>Last Name</th>
             <th>ID</th>
             <th>Salary</th>
+          </tr>
+          <tr id="employeeRow" ng-repeat="employee in employees">
+            <td>{{employee.first_name}}</td>
+            <td>{{employee.last_name}}</td>
+            <td>{{employee.id}}</td>
+            <td>{{employee.salary}}</td>
+            <td><input ng-click="deleteEmployee()" type="submit" value="Delete Employee"/></td>
+          </tr>
         </table>
-        <div id="monthlysalarytotal">
-            <p><span id="salarytext">Monthly Salary Expenditures: $</span><span id="expenditures"></span></p>
+        <div ng-model="salaryTotal" id="monthlysalarytotal">
+            <p><span id="salarytext">Monthly Salary Expenditures: $</span><span id="expenditures">{{salaries}}</span></p>
         </div>
     </div>
+
 </body>
 
 </html>
